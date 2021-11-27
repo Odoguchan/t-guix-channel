@@ -2,4 +2,6 @@
 ;; this repository.
 
 (authorazations
- (version 0))
+ (version 0)
+ ("1A68 EF55 10D7 BF60 8203 3A19 BC83 5C61 DEC7 8808"
+  (name "ordog")))
