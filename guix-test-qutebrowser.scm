@@ -92,36 +92,36 @@
                                           #t))
                             (add-after 'install 'install-more
                                        (lambda* (#:key outputs #:allow-other-keys)
-                                                (let* ((out (assoc-ref outputs "out"))
-                                                       (app (string-append out "/share/applications"))
-                                                       (hicolor (string-append out "/share/icons/hicolor")))
-                                                  (install-file "doc/qutebrowser.1"
-                                                                (string-append out "/share/man/man1"))
-                                                  (for-each
-                                                   (lambda (i)
-                                                     (let ((src  (format #f "icons/qutebrowser-~dx~d.png" i i))
-                                                           (dest (format #f "~a/~dx~d/apps/qutebrowser.png"
-                                                                         hicolor i i)))
-                                                       (mkdir-p (dirname dest))
-                                                       (copy-file src dest)))
-                                                   '(16 24 32 48 64 128 256 512))
-                                                  (install-file "icons/qutebrowser.svg"
-                                                                (string-append hicolor "/scalable/apps"))
-                                                  (substitute* "misc/org.qutebrowser.qutebrowser.desktop"
-                                                               (("Exec=qutebrowser")
-                                                                (string-append "Exec=" out "/bin/qutebrowser")))
-                                                  (install-file "misc/org.qutebrowser.qutebrowser.desktop" app)
-                                                  #t)))
+                                         (let* ((out (assoc-ref outputs "out"))
+                                                (app (string-append out "/share/applications"))
+                                                (hicolor (string-append out "/share/icons/hicolor")))
+                                           (install-file "doc/qutebrowser.1"
+                                                         (string-append out "/share/man/man1"))
+                                           (for-each
+                                            (lambda (i)
+                                              (let ((src  (format #f "icons/qutebrowser-~dx~d.png" i i))
+                                                    (dest (format #f "~a/~dx~d/apps/qutebrowser.png"
+                                                                  hicolor i i)))
+                                                (mkdir-p (dirname dest))
+                                                (copy-file src dest)))
+                                            '(16 24 32 48 64 128 256 512))
+                                           (install-file "icons/qutebrowser.svg"
+                                                         (string-append hicolor "/scalable/apps"))
+                                           (substitute* "misc/org.qutebrowser.qutebrowser.desktop"
+                                                        (("Exec=qutebrowser")
+                                                         (string-append "Exec=" out "/bin/qutebrowser")))
+                                           (install-file "misc/org.qutebrowser.qutebrowser.desktop" app)
+                                           #t)))
                             (add-after 'wrap 'wrap-qt-process-path
                                        (lambda* (#:key inputs outputs #:allow-other-keys)
-                                                (let* ((out (assoc-ref outputs "out"))
-                                                       (bin (string-append out "/bin/qutebrowser"))
-                                                       (qt-process-path (string-append
-                                                                         (assoc-ref inputs "qtwebengine")
-                                                                         "/lib/qt5/libexec/QtWebEngineProcess")))
-                                                  (wrap-program bin
-                                                                `("QTWEBENGINEPROCESS_PATH" ":" prefix (,qt-process-path)))
-                                                  #t))))))
+                                         (let* ((out (assoc-ref outputs "out"))
+                                                (bin (string-append out "/bin/qutebrowser"))
+                                                (qt-process-path (string-append
+                                                                  (assoc-ref inputs "qtwebengine")
+                                                                  "/lib/qt5/libexec/QtWebEngineProcess")))
+                                           (wrap-program bin
+                                                         `("QTWEBENGINEPROCESS_PATH" ":" prefix (,qt-process-path)))
+                                           #t))))))
  (home-page "https://qutebrowser.org/")
  (synopsis "Minimal, keyboard-focused, vim-like web browser")
  (description "qutebrowser is a keyboard-focused browser with a minimal
