@@ -42,6 +42,11 @@
              (gnu packages time)
              (gnu packages web)
              (gnu packages xml)
+
+             ;; (gnu packages mp3)
+             ;; (gnu packages python-web)
+             ;; (gnu packages linux)
+
              ((guix licenses) #:prefix license:)
 
              (srfi srfi-1))
@@ -56,16 +61,17 @@
                        "qutebrowser/releases/download/v" version "/"
                        "qutebrowser-" version ".tar.gz"))
    (sha256
-    ;; (base32 "0fxkazz4ykmkiww27l92yr96hq00qn5vvjmknxcy4cl97d2pxa28"))))
-    ;; (base32 "1kj2hcr1avn9iwwvzrg3mp30lifhdlx1bgavisbi32a9gnnh06xp"))))
     (base32 "05n64mw9lzzxpxr7lhakbkm9ir3x8p0rwk6vbbg01aqg5iaanyj0"))))
 
  (build-system python-build-system)
+ (native-inputs
+  `(("python-attrs" ,python-attrs))) ; for tests
  (inputs
   `(("python-colorama" ,python-colorama)
     ("python-jinja2" ,python-jinja2)
     ("python-markupsafe" ,python-markupsafe)
     ("python-pygments" ,python-pygments)
+    ("python-pypeg2" ,python-pypeg2)
     ("python-pyyaml" ,python-pyyaml)
     ;; FIXME: python-pyqtwebengine needs to come before python-pyqt so
     ;; that it's __init__.py is used first.
